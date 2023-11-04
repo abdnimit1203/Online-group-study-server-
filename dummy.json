@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "title": "Math Homework",
+      "description": "Complete the exercises from chapters 1 and 2.",
+      "marks": 100,
+      "thumbnailImageUrl": "https://assignmentstudio.net/wp-content/uploads/2019/01/animation.png",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-15"
+    },
+    {
+      "id": 2,
+      "title": "Literature Essay",
+      "description": "Write a 5-page essay on 'To Kill a Mockingbird.'",
+      "marks": 85,
+      "thumbnailImageUrl": "https://assignmentstudio.net/wp-content/uploads/2019/01/animation.png",
+      "difficultyLevel": "hard",
+      "dueDate": "2023-11-20"
+    },
+    {
+      "id": 3,
+      "title": "History Quiz",
+      "description": "Answer multiple-choice questions on World War II.",
+      "marks": 50,
+      "thumbnailImageUrl": "https://assignmentstudio.net/wp-content/uploads/2019/01/animation.png",
+      "difficultyLevel": "easy",
+      "dueDate": "2023-11-10"
+    },
+    {
+      "id": 4,
+      "title": "Chemistry Lab Report",
+      "description": "Perform an experiment and submit a lab report.",
+      "marks": 90,
+      "thumbnailImageUrl": "https://assignmentstudio.net/wp-content/uploads/2019/01/animation.png",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-18"
+    },
+    {
+      "id": 5,
+      "title": "Programming Assignment",
+      "description": "Write code for a simple web application.",
+      "marks": 75,
+      "thumbnailImageUrl": "https://assignmentstudio.net/wp-content/uploads/2019/01/animation.png",
+      "difficultyLevel": "medium",
+      "dueDate": "2023-11-14"
+    },
+    {
+      "id": 6,
+      "title": "French Vocabulary Quiz",
+      "description": "Test your knowledge of French vocabulary.",
+      "marks": 60,
+      "thumbnailImageUrl": "https://assignmentstudio.net/wp-content/uploads/2019/01/animation.png",
+      "difficultyLevel": "easy",
+      "dueDate": "2023-11-12"
+    }
+  ]
+  
