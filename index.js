@@ -34,6 +34,9 @@ async function run() {
     const assignmentCollection = client
       .db("collaboraTaskDB")
       .collection("assignments");
+    const submittedCollection = client
+      .db("collaboraTaskDB")
+      .collection("submits");
 
     app.get("/api/v1/assignments", async (req, res) => {
         console.log(req.query.difficulty);
@@ -91,7 +94,18 @@ async function run() {
       res.send(result);
     });
 
-
+    // submitted assignment get
+    app.get("/api/v1/submitted-assignments", async (req, res) => {
+      const cursor = submittedCollection.find()
+      const result = await cursor.toArray()
+      res.send(result);
+    });
+    // submitted assignment post
+    app.post("/api/v1/submitted-assignments", async (req, res) => {
+      const submitData = req.body;
+      const result = await submittedCollection.insertOne(submitData);
+      res.send(result);
+    });
 
 
 
