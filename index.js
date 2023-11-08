@@ -39,15 +39,15 @@ async function run() {
       .collection("submits");
 
     app.get("/api/v1/assignments", async (req, res) => {
-        console.log(req.query.difficulty);
-        let query = {}
-        if(req.query?.difficulty){
-            query = {difficulty: req.query.difficulty}
-        }
-        if(req.query?.difficulty == "All"){
-            query = {}
-        }
-     
+      console.log(req.query.difficulty);
+      let query = {};
+      if (req.query?.difficulty) {
+        query = { difficulty: req.query.difficulty };
+      }
+      if (req.query?.difficulty == "All") {
+        query = {};
+      }
+
       const cursor = assignmentCollection.find(query);
       const result = await cursor.toArray();
       res.send(result);
@@ -65,39 +65,49 @@ async function run() {
       res.send(result);
     });
     // put method for updating data
-    app.put('/api/v1/user/update/:id',async(req,res)=>{
-      const id = req.params.id
-      const updated = req.body
+    app.put("/api/v1/user/update/:id", async (req, res) => {
+      const id = req.params.id;
+      const updated = req.body;
       // console.log(id , updated);
 
       const filter = { _id: new ObjectId(id) };
       const options = { upsert: true };
-      const updateAssignment ={
-        $set:{
+      const updateAssignment = {
+        $set: {
           title: updated.title,
           description: updated.description,
           marks: updated.marks,
           difficulty: updated.difficulty,
           imageURL: updated.imageURL,
-          dueDate: updated.dueDate
-        }
-      }
-      const result = await assignmentCollection.updateOne(filter, updateAssignment, options);
-      res.send(result)
-
-    })
+          dueDate: updated.dueDate,
+        },
+      };
+      const result = await assignmentCollection.updateOne(
+        filter,
+        updateAssignment,
+        options
+      );
+      res.send(result);
+    });
     //id wise assignment delete
     app.delete("/api/v1/assignments/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: new ObjectId(id) }
+      const query = { _id: new ObjectId(id) };
       const result = await assignmentCollection.deleteOne(query);
       res.send(result);
     });
 
     // submitted assignment get
     app.get("/api/v1/submitted-assignments", async (req, res) => {
-      const cursor = submittedCollection.find()
-      const result = await cursor.toArray()
+      let query = {};
+      if (req.query?.status) {
+        query = { status: req.query?.status };
+      }
+      if(req.query?.email){
+        query = { email: req.query?.email };
+      }
+      const cursor = submittedCollection.find(query);
+      const result = await cursor.toArray();
       res.send(result);
     });
     // submitted assignment post
@@ -105,7 +115,37 @@ async function run() {
       const submitData = req.body;
       const result = await submittedCollection.insertOne(submitData);
       res.send(result);
+    })
+     //id wise assignment get
+     app.get("/api/v1/submitted-assignments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const submits = await submittedCollection.findOne(query);
+      res.send(submits);
     });
+    // updating submitted data
+    app.put("/api/v1/submitted/update/:id", async (req, res) => {
+      const id = req.params.id;
+      const updated = req.body;
+      console.log(id , updated);
+
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateAssignment = {
+        $set: {
+          status: updated.status,
+          marksObtained: updated.marksObtained,
+          feedback: updated.feedback
+        }
+      };
+      const result = await submittedCollection.updateOne(
+        filter,
+        updateAssignment,
+        options
+      );
+      res.send(result);
+    });
+
 
 
 
