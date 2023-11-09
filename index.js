@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://collabora-task-b8a11.web.app"],
+    origin: ["http://localhost:5173"],
     credentials: false,
   })
 );
@@ -39,7 +39,9 @@ async function run() {
       .collection("submits");
 
     app.get("/api/v1/assignments", async (req, res) => {
-      console.log(req.query.difficulty);
+      console.log(req.query);
+      const page = parseInt(req.query.page)
+      const size = parseInt(req.query.size)
       let query = {};
       if (req.query?.difficulty) {
         query = { difficulty: req.query.difficulty };
@@ -48,10 +50,24 @@ async function run() {
         query = {};
       }
 
-      const cursor = assignmentCollection.find(query);
+      const cursor = assignmentCollection.find(query).skip(page*size).limit(size);
       const result = await cursor.toArray();
+      
       res.send(result);
     });
+    // data count
+    app.get('/api/v1/assignmentCount', async(req,res)=>{
+      console.log(req.query);
+      let query = {};
+      if (req.query?.difficulty) {
+        query = { difficulty: req.query.difficulty };
+      }
+      if (req.query?.difficulty == "All") {
+        query = {};
+      }
+      const count = await assignmentCollection.countDocuments(query)
+      res.send({count});
+    })
     //id wise assignment get
     app.get("/api/v1/assignments/:id", async (req, res) => {
       const id = req.params.id;
