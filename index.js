@@ -37,6 +37,9 @@ async function run() {
     const submittedCollection = client
       .db("collaboraTaskDB")
       .collection("submits");
+    const chatsCollection = client
+      .db("collaboraTaskDB")
+      .collection("chats");
 
     app.get("/api/v1/assignments", async (req, res) => {
       console.log(req.query);
@@ -164,6 +167,19 @@ async function run() {
 
 
 
+ // chat message get
+ app.get("/api/v1/chats", async (req, res) => {
+  
+  const cursor = chatsCollection.find();
+  const result = await cursor.toArray();
+  res.send(result);
+});
+// chat message post
+app.post("/api/v1/chats", async (req, res) => {
+  const chatData = req.body;
+  const result = await chatsCollection.insertOne(chatData);
+  res.send(result);
+})
 
 
 
