@@ -7,4 +7,4 @@ For this server the Database i used is MongoDB. CRUD Operations are handled in M
 
 - Express.js is used for JSON and REST API operations.
 
-[CLIENT SIDE SERVER IS HERE](https://github.com/Porgramming-Hero-web-course/b8a11-client-side-abdnimit1203)
+[CLIENT SIDE SERVER IS HERE](https://github.com/abdnimit1203/Online-group-study)
