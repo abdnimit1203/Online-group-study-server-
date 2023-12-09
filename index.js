@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://collabora-task-b8a11.web.app", "http://localhost:5173" , "colab-online-study-group-ab.netlify.app"],
     credentials: false,
   })
 );
